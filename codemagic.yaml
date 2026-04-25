@@ -1,0 +1,16 @@
+workflows:
+  android-workflow:
+    name: Android Build
+    max_build_duration: 60
+    environment:
+      java: 17
+    scripts:
+      - name: Extract ZIP and Build APK
+        script: |
+          unzip SSCResult.zip
+          cd SSCResult
+          gradle wrapper --gradle-version 8.0
+          chmod +x gradlew
+          ./gradlew assembleDebug
+    artifacts:
+      - SSCResult/app/build/outputs/apk/debug/app-debug.apk
